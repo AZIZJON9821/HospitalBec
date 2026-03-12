@@ -1,15 +1,23 @@
-FROM node:20-alpine
+# Base image
+FROM node:18-alpine
 
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
+
+# Install app dependencies
 RUN npm install
 
+# Bundle app source
 COPY . .
-RUN npx prisma generate --schema=../prisma/schema.prisma
 
+# Build the app
 RUN npm run build
 
+# Expose port
 EXPOSE 5000
 
-CMD ["npm", "run", "start:prod"]
+# Start the server using the production build
+CMD [ "npm", "run", "start:prod" ]
