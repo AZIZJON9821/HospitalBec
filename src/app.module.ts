@@ -14,10 +14,13 @@ import { NotificationsModule } from './notifications/notifications.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { StatsModule } from './stats/stats.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { SupabaseModule } from './supabase/supabase.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(),
     PrismaModule,
     AuthModule,
     UsersModule,
@@ -29,6 +32,7 @@ import { StatsModule } from './stats/stats.module';
     SchedulesModule,
     UploadsModule,
     StatsModule,
+    SupabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService, SeedService],
